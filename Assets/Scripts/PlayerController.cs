@@ -17,13 +17,7 @@ public class PlayerController : MonoBehaviour
 
     public Animator animator;
     public Transform model;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         float hInput = Input.GetAxis("Horizontal");
@@ -39,7 +33,12 @@ public class PlayerController : MonoBehaviour
             ableToMakeADoubleJump = true;
             if (Input.GetButtonDown("Jump"))
             {
-                direction.y = jumpForce;
+                Jump();
+            }
+
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                animator.SetTrigger("fireBallAttack");
             }
         }
         else
@@ -47,17 +46,28 @@ public class PlayerController : MonoBehaviour
             direction.y += gravity * Time.deltaTime;
             if (ableToMakeADoubleJump & Input.GetButtonDown("Jump"))
             {
-                animator.SetTrigger("doubleJump");
-                direction.y = jumpForce;
-                ableToMakeADoubleJump = false;
+                DoubleJump();
             }
+        }
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("FireBall Attack"))
+        {
+            return;
         }
         if(hInput != 0)
         {
             Quaternion newRotation = Quaternion.LookRotation(new Vector3(hInput, 0, 0));
             model.rotation = newRotation;
         }
-
+        void DoubleJump()
+        {
+            animator.SetTrigger("doubleJump");
+            direction.y = jumpForce;
+            ableToMakeADoubleJump = false;
+        }
+        void Jump()
+        {
+            direction.y = jumpForce;
+        }
        
         controller.Move(direction * Time.deltaTime);
     }
