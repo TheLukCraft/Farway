@@ -6,7 +6,27 @@ ModelImporter:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Zombie_COL
+    second: {fileID: 2100000, guid: 50ce940b4bd8f5c4f9db43ccecd90797, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Zombie_diffuse
+    second: {fileID: 2800000, guid: eedb76857b304294f8ee892dec594215, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Zombie_normal
+    second: {fileID: 2800000, guid: 648b9384e87cc2c4685735227fbce5e9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Zombie_specular
+    second: {fileID: 2800000, guid: 72f9ea47c9c0e5c4980074905598d98a, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -75,11 +95,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - ea2a151f69220594a9aaa8063cccca5c
-  - 5314da9d08b98484e9d85c3805bb8ba5
-  - 641981fdd7593b24baa43cbad7dea99f
-  - b82985af6d6cebd4595e89e96646bc8e
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
