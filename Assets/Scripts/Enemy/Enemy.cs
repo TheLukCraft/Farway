@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,10 +11,14 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public float speed = 3;
     public float attackRange = 2;
+
+    public int health = 100;
+    public int maxHealth = 100;
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -25,7 +30,8 @@ public class Enemy : MonoBehaviour
         {
             if (distance < chaseRange)
                 currentState = "ChaseState";
-        }else if(currentState == "ChaseState")
+        }
+        else if(currentState == "ChaseState")
         {
             animator.SetTrigger("chase");
             animator.SetBool("isAttacking", false);
@@ -44,7 +50,8 @@ public class Enemy : MonoBehaviour
                 transform.Translate(-transform.right * speed * Time.deltaTime);
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
-        }else if (currentState == "AttackState")
+        }
+        else if (currentState == "AttackState")
         {
             animator.SetBool("isAttacking", true);
             if (distance > attackRange)
@@ -52,5 +59,25 @@ public class Enemy : MonoBehaviour
                 currentState = "ChaseState";
             }
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        currentState = "ChaseState";
+
+        if(health < 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        //Debug.Log("enemy is dead");
+        animator.SetTrigger("isDead");
+
+        GetComponent<CapsuleCollider>().enabled = false;
+        this.enabled = false;
     }
 }
