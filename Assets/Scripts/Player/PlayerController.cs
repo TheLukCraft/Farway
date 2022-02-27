@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(PlayerManager.gameOver)
+        {
+            animator.SetTrigger("die");
+            this.enabled = false;
+        }
         float hInput = Input.GetAxis("Horizontal");
         direction.x = hInput * speed;
 
